@@ -1,8 +1,14 @@
 <template>
 
   <section>
-    <h3>{{post.title}}</h3>
+    <h3><router-link :to="{name:'detail', params: {slug: post.slug}}">{{post.title}}</router-link></h3>
     <p class="data">{{formatDate}}</p>
+    <p v-if="post.category">{{post.category.name}}</p>
+    <span v-for="tag in post.tags"
+    :key="tag.id"
+    >
+    {{tag.name}}
+    </span>
     <p>{{maxCharacter}}</p>
   </section>
   
@@ -45,13 +51,19 @@ export default {
 section{
   margin: 15px 0;
 
-  h3{
-    padding-bottom: 5px;  
+  h3, p{
+    padding-top: 5px;  
   }
-  
-  .data{
-    padding-bottom: 10px;
-  } 
+
+  span{
+    margin-right: 2px;
+    background-color: #0077ff;
+    color: white;
+    padding: 2px 4px;
+    font-size: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
 }
 
 </style>
