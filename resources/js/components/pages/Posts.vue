@@ -1,45 +1,53 @@
 <template>
   <main>
     <div class="container">
-      <h1>Posts</h1>
+
+      <div v-if="posts">
+
+        <h1>Posts</h1>
        
-      <SinglePost
-       v-for="post in posts"
-       :key="post.id"
-       :post="post" 
-      />
+        <SinglePost
+          v-for="post in posts"
+         :key="post.id"
+         :post="post" 
+        />
 
-      <div class="bottoni">
-        <button
-        @click="getPosts(pagination.current - 1)"
-        :disabled = "pagination.current === 1"
-        >Prev</button>
+        <div class="bottoni">
+          <button
+            @click="getPosts(pagination.current - 1)"
+            :disabled = "pagination.current === 1"
+          >Prev</button>
 
-        <div class="bottoni_num">
+          <div class="bottoni_num">
+
+            <button
+              v-for="page in pagination.last"
+              :key="page"
+              @click="getPosts(page)"
+              :disabled="pagination.current === page"
+            >
+            {{page}}
+            </button>
+
+          </div>
 
           <button
-          v-for="page in pagination.last"
-          :key="page"
-          @click="getPosts(page)"
-          :disabled="pagination.current === page"
-          >
-          {{page}}
+            @click="getPosts(pagination.current + 1)"
+            :disabled = "pagination.current === pagination.last">
+            Next
           </button>
-
         </div>
-
-        <button
-        @click="getPosts(pagination.current + 1)"
-        :disabled = "pagination.current === pagination.last"
-        >Next</button>
       </div>
 
+      <div v-else>
+        <h1>LOADING ...</h1>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
-import SinglePost from './partials/SinglePost.vue';
+import SinglePost from '../partials/SinglePost.vue';
 
 export default {
   name: "Posts",
