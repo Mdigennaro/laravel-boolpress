@@ -2,7 +2,7 @@
   <main>
     <div class="container">
 
-      <div v-if="posts">
+      <div class="posts" v-if="posts">
 
         <h1>Posts</h1>
        
@@ -42,18 +42,24 @@
       <div v-else>
         <h1>LOADING ...</h1>
       </div>
+
+      <Sidebar />
+
+
     </div>
   </main>
 </template>
 
 <script>
 import SinglePost from '../partials/SinglePost.vue';
+import Sidebar from '../partials/Sidebar.vue';
 
 export default {
   name: "Posts",
 
   components:{
-    SinglePost
+    SinglePost,
+    Sidebar
   },
 
   data(){
@@ -93,22 +99,33 @@ export default {
 main{
   padding: 40px 0;
 
-  .bottoni{
-    width: 100%;
+  .container{
     display: flex;
-    justify-content: space-between;
-    
-    button{
-      padding: 7px 15px;
-      cursor: pointer;
-    }
 
-    .bottoni_num{
-      
+    .bottoni{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 50px;
+    
       button{
-        margin: 0 2px;
+        padding: 7px 15px;
+        cursor: pointer;
+      }
+
+      .bottoni_num{
+      
+        button{
+          margin: 0 2px;
+        }
       }
     }
+
+    .posts{
+      width: 60%;
+    }
+
   }
+
 }
 </style>
