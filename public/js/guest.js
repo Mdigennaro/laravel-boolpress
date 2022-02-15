@@ -2207,6 +2207,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.posts = null;
+      this.success = true;
       axios.get(this.apiUrl + '/postcategory/' + slug_category).then(function (r) {
         _this.posts = r.data.category.posts;
 
@@ -2222,9 +2223,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.posts = null;
+      this.success = true;
       axios.get(this.apiUrl + '/posttag/' + slug_tag).then(function (r) {
         _this2.posts = r.data.tag.posts;
-        console.log(_this2.posts);
+
+        if (!r.data.success) {
+          _this2.error_msg = r.data.error;
+          _this2.success = false;
+        }
       })["catch"](function (e) {
         console.log(e);
       });
@@ -2234,6 +2240,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.posts = null;
+      this.success = true;
       axios.get(this.apiUrl + '?page=' + page).then(function (r) {
         _this3.posts = r.data.posts.data;
         console.log(_this3.posts);
