@@ -94,6 +94,7 @@ export default {
   methods:{
     getPostByCategory(slug_category){
       this.posts = null;
+      this.success =true;
 
       axios.get(this.apiUrl + '/postcategory/' + slug_category)
       .then(r =>{
@@ -112,12 +113,18 @@ export default {
 
     getPostByTag(slug_tag){
       this.posts = null;
+      this.success =true;
 
       axios.get(this.apiUrl + '/posttag/' + slug_tag)
       .then(r =>{
 
         this.posts = r.data.tag.posts;
-        console.log(this.posts);
+        
+        if (!r.data.success) {
+          this.error_msg = r.data.error;
+          this.success = false;
+        }
+
 
       })
       .catch(e =>{
@@ -127,6 +134,7 @@ export default {
 
     getPosts(page = 1){
       this.posts = null;
+      this.success =true;
 
       axios.get(this.apiUrl + '?page=' + page)
       .then(r => {
