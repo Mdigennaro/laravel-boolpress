@@ -20,5 +20,7 @@ Route::namespace('Api')
         
         Route::get('/', 'PostController@index');
         Route::get('{slug}', 'PostController@show');
+        Route::get('postcategory/{slug}', 'PostController@getPostsByCategories');
+        Route::get('posttag/{slug}','PostController@getPostsByTags');
         
       });

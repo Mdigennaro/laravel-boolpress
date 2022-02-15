@@ -4,16 +4,22 @@
 
     <div class="categorie">
       <h3>Categorie</h3>
-      <span>HTML</span>
-      <span>PHP</span>
-      <span>PHP</span>
+
+      <span v-for="category in categories" 
+      :key="`cat${category.id}`"
+      @click="$emit('getPostByCategory', category.slug)">
+      {{category.name}}
+      </span>
     </div>
 
     <div class="tags">
       <h3>Tag</h3>
-      <span>Tag</span>
-      <span>Tag</span>
-      <span>Tag</span>
+
+      <span v-for="tag in tags"
+      :key="`tag${tag.id}`"
+      @click="$emit('getPostByTag', tag.slug)">
+      {{tag.name}}
+      </span>
     </div>
 
   </div>
@@ -22,7 +28,12 @@
 
 <script>
 export default {
-  name: "Sidebar"
+  name: "Sidebar",
+  
+  props:{
+    tags: Array,
+    categories: Array
+  }
 }
 </script>
 
